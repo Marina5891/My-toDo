@@ -1,0 +1,302 @@
+.app {
+  text-align: center;
+  background-image: linear-gradient(#4bafc9 40%, #93cadf 60%, #dcab5e 100%);
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header {
+  background-color: transparent;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px 3px 70px;
+  margin-bottom: 150px;
+}
+
+.logo {
+  width: 64px;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  height: max-content;
+}
+
+.loginName {
+  margin: 0 15px 0 0;
+  display: inline-block;
+  font-size: 18px;
+  color: #f9ecdc;
+}
+
+main {
+  position: relative;
+}
+
+.errorMessage {
+  width: 40%;
+  padding: 10px;
+  background-color: #f9ecdc;
+  border: 1px solid #aea59a;
+  border-radius: 5px;
+  margin: 0 auto 20px;
+}
+
+.formTitle {
+  color: #f9ecdc;
+  margin-bottom: 100px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  color: #772d09;
+  font-weight: 700;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.formItem label {
+  margin-right: 15px;
+  width: 130px;
+}
+
+#completionDate+label {
+  width: auto;
+  margin-left: 15px;
+}
+
+.formItem {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+#email,
+#password,
+#title,
+#description {
+  flex-grow: 1;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  padding-left: 20px;
+}
+
+#description {
+  height: auto;
+  padding: 10px 20px;
+}
+
+#title,
+#description {
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#email::placeholder,
+#password::placeholder,
+#title::placeholder,
+#description::placeholder {
+  color: #4bafc9;
+}
+
+#email:focus,
+#password:focus,
+#title:focus,
+#description:focus {
+  outline: none;
+  box-shadow: 0 0 10px #347a8c;
+}
+
+.button {
+  align-self: center;
+  padding: 10px 30px;
+  border-radius: 5px;
+  border: 1px solid #668d9c;
+  background-color: #93cadf;
+  color: #772d09;
+  font-weight: 700;
+  margin: 30px 0;
+  font-size: 16px;
+}
+
+.button:hover {
+  box-shadow: 0 0 10px #347a8c;
+}
+
+.logOutBtn {
+  padding: 10px 20px;
+}
+
+.buttonsGroup {
+  justify-content: center;
+}
+
+.buttonsGroup input:first-child {
+  margin-right: 15px;
+}
+
+.returnButton {
+  display: inline-block;
+  position: fixed;
+  bottom: 5%;
+  left: 5%;
+}
+
+.statusButtons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.done,
+.edit,
+.remove,
+.notDone {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border: none;
+}
+
+.notDone {
+  background-color: darkgreen;
+  box-shadow: 0 0 5px rgb(1, 60, 1);
+}
+
+.done:hover {
+  background-color: rgb(6, 228, 6);
+  box-shadow: 0 0 15px 5px darkgreen;
+}
+
+.edit {
+  background-color: darkgoldenrod;
+  box-shadow: 0 0 5px rgb(101, 74, 4);
+}
+
+.done {
+  background-color: rgb(4, 221, 4);
+}
+
+.edit:hover {
+  background-color: gold;
+  box-shadow: 0 0 15px 5px darkgoldenrod;
+}
+
+.remove {
+  background-color: darkred;
+  box-shadow: 0 0 5px rgb(69, 0, 0);
+}
+
+.remove:hover {
+  background-color: red;
+  box-shadow: 0 0 15px 5px darkred;
+}
+
+.authMessage a {
+  color: #ab410d;
+  margin-left: 10px;
+}
+
+.authMessage a:hover {
+  color: #772d09;
+  margin-left: 10px;
+}
+
+.createTask {
+  position: fixed;
+  top: 160px;
+  right: 100px;
+  width: 60px;
+  height: 60px;
+  background-color: #dcab5e;
+  border: 3px solid #772d09;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createTask:hover {
+  background-color: #93cadf;
+}
+
+.createTask::before,
+.createTask::after {
+  content: '';
+  background-color: #772d09;
+  position: relative;
+}
+
+.createTask::before {
+  height: 3px;
+  width: 30px;
+}
+
+.createTask::after {
+  height: 30px;
+  width: 3px;
+  right: 16px;
+}
+
+.taskList {
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 20px;
+}
+
+.taskItem {
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 20px 10px;
+  box-shadow: 0 5px 5px #9a7741;
+  border: 1px solid #9a7741;
+  color: #191816;
+}
+
+.taskItem h3 {
+  color: #772d09;
+  margin-bottom: 15px;
+}
+
+.taskItem p {
+  margin-bottom: 20px;
+}
+
+.taskItem .dateCompletionTask {
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.imageBlock {
+  width: 40%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 20px;
+}
+
+.imageTask {
+  max-width: 100px;
+  position: relative;
+}
+
+.imageTask:hover {
+  opacity: 0.5;
+}

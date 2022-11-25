@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: CreateTask.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: CreateTask.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
+import { useUserDocs } from '../contexts/UserDocsContext';
+
+/** Компонента CreateTask, которая отображает страницу создания 
+ * новой задачи
+ */
+
+export const CreateTask = () => {
+  const navigate = useNavigate();
+  /**
+   * addTask - функция, добавляющая новую задачу на сервер,
+   * функция setFileTask - для установки нового значения 
+   * переменной fileTask,
+   * функция setFileTaskURL - для установки нового значения 
+   * переменной fileTaskURL,
+   * функция setImage - для установки нового значения переменной image,
+   * fileTaskURL - массив ссылок на изображения,    
+   * image - массив тегов со ссылками на изображения 
+   * (вида [&lt;img src={}/>, &lt;img src={}/>, ... ]),
+   * полученные из UserDocsContextProvider
+   */
+  const {
+    addTask,
+    setFileTask,
+    setFileTaskURL,
+    setImage,
+    fileTaskURL,
+    image
+  } = useUserDocs();
+  /** Экземпляр класса FileReader для чтения ссылки на файл */
+  const fileReader = new FileReader;
+  const currentDate = dayjs().format('YYYY-MM-DD HH:mm');
+
+  /**
+   * Возвращает на страницу профиля, обнуляя переменные fileTask, 
+   * fileTaskURL и image */
+  const handleReturn = () => {
+    setFileTask(null);
+    setFileTaskURL([]);
+    setImage([]);
+    navigate('/profile');
+  }
+  /** Получает из поля выбора файлов ссылку на загружаемый файл */
+  const handleOnChange = (event) => {
+    let file = event.target.files[0]
+    setFileTask(file);
+    fileReader.readAsDataURL(file)
+  }
+
+  /** Загружает ссылки на файлы в массив fileTaskURL, 
+  * загружает теги со ссылками на полученные изображения в массив image */
+  fileReader.onload = () => {
+    setFileTaskURL(prevVaule => [...prevVaule, fileReader.result]);
+    setImage(prevImage => [...prevImage, &lt;img src={fileReader.result} className='imageTask' title='Функционал удаления еще недоработан' />])
+  }
+  /** Отправляет созданную задачу на сервер */
+  function handleSubmit(e) {
+    e.preventDefault();
+    const { target: { title, description, completionDate }
+    } = e;
+    const now = dayjs();
+    const task = {
+      title: title.value,
+      description: description.value,
+      createdAt: now.$d,
+      file: fileTaskURL,
+      completionDate: completionDate.value,
+      status: false
+    }
+    try {
+      addTask(task);
+      setFileTask(null);
+      setFileTaskURL([]);
+      setImage([]);
+      navigate('/profile');
+    } catch (err) {
+      console.log(err.message)
+    }
+  }
+
+  return (
+    &lt;main>
+      &lt;h1 className='formTitle'>Создать задачу&lt;/h1>
+      &lt;button className='button returnButton' onClick={handleReturn}>Вернуться&lt;/button>
+      &lt;form className='form' method='post' onSubmit={handleSubmit}>
+        &lt;div className='formItem'>
+          &lt;input
+            name='title'
+            id='title'
+            placeholder='Название'
+            required
+            autoFocus />
+        &lt;/div>
+        &lt;div className='formItem'>
+          &lt;textarea
+            name='description'
+            id='description'
+            placeholder='Описание'
+            required
+            rows='5'>
+          &lt;/textarea>
+        &lt;/div>
+        &lt;div className='formItem'>
+          &lt;input
+            name='completionDate'
+            id='completionDate'
+            type='datetime-local'
+            defaultValue={currentDate} />
+          &lt;label htmlFor='completionDate'>Назначить дату завершения&lt;/label>
+        &lt;/div>
+        &lt;div className='formItem'>
+          &lt;input
+            type='file'
+            name='file'
+            id='file'
+            multiple
+            onChange={handleOnChange}
+            accept='image/*, video/*, audio/*, text/*' />
+        &lt;/div>
+        &lt;div className='formItem buttonsGroup'>
+          &lt;input
+            type='submit'
+            className='button'
+            value='Создать' />
+          &lt;input
+            type='reset'
+            className='button'
+            value='Очистить' />
+        &lt;/div>
+      &lt;/form>
+      &lt;div className='imageBlock'>
+        {image}
+      &lt;/div>
+    &lt;/main>
+  )
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#CreateTask">CreateTask</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Fri Nov 25 2022 21:45:16 GMT+0500 (Западный Казахстан)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
